@@ -25,9 +25,9 @@ import com.xamarin.testcloud.appium.EnhancedAndroidDriver;
 import org.junit.rules.TestWatcher;
 import org.junit.Rule;
 
-public class AndroidTest {
+public class iOSTest {
 	
-	private static EnhancedAndroidDriver<MobileElement> driver;
+	private static EnhancedIOSDriver<MobileElement> driver;
 
 	private TestAppScreenSimple uiTestApp;
     @Rule
@@ -35,19 +35,18 @@ public class AndroidTest {
 	
 	@Before
 	public void setUp() throws Exception {
-        File appDir = new File("D:\\Users\\v-tuchen\\Desktop\\react-native\\AndroidReact1\\android\\app\\build\\outputs\\apk");
-        File app = new File(appDir, "app-debug.apk");
+        File appDir = new File("/Users/bys/Documents/SwiftDemo/build/Debug-iphoneos");
+        File app = new File(appDir, "SwiftDemo.app");
 	    DesiredCapabilities capabilities = new DesiredCapabilities();
 	    capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "");
 	    capabilities.setCapability(MobileCapabilityType.APPIUM_VERSION, "1.6");
-		capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-	    capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "7.1.1");
-	    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "VisualStudio_android-23_x86_phone");
+	    capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.3");
+	    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 6s");
 	    capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
 	    
 	    uiTestApp = new TestAppScreenSimple();
 	    //driver = new EnhancedIOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-        driver = Factory.createAndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver = Factory.createIOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 
 		System.out.println(driver.getPageSource());
 		PageFactory.initElements(new AppiumFieldDecorator(driver), uiTestApp);
